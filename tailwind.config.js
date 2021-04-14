@@ -10,28 +10,23 @@ module.exports = {
         secondary_action: "#4169F2",
         font_primary_color: "#333",
         font_disable_color: "#888",
+        error: "#FF2B3A",
+        success: '#005347'
       },
       minHeight:{
         '40vh': '40vh'
       },
       minWidth:{
+        '25vw': '25vw',
+        '40vw': '40vw',
         '50vw': '50vw',
         '75vw': '75vw',
         '95vw': '95vw'
-
       }
-    },
-    screens: {
-      'hideMenu': {'min':'320px', 'max':'1023px'},
-      'showMenu': {'min':'1024px'}
     },
     fontFamily: {
       'poppins': ['"Open Sans"','sans-serif']
     },
-    gridTemplateColumns:{
-      '1frMinContent1fr': '1fr min-content 1fr',
-      '1frOnly': '1fr',
-    }
   },
   variants: {
     extend: {},
