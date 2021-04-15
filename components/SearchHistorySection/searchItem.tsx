@@ -106,14 +106,14 @@ const SearchHistoryItem: React.FC = () => {
                     handleSearchWeatherByCityID(item);
                   }}
                   className="mx-4">
-                  <Image src="/search-icon.svg" height={20} width={20} />
+                  <img className="w-6 h-6" src="/images/search-icon.svg" alt="search-item" />
                 </div>
                 <div
                   onClick={(e) => {
                     e.preventDefault();
                     handleDeleteSearchItem(item);
                   }}>
-                  <Image src="/trash-icon.svg" height={20} width={20} />
+                  <img className="w-6 h-6" src="/images/trash-icon.svg" alt="delete-item" />
                 </div>
               </div>
             </div>
