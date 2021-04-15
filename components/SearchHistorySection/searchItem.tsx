@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
+// import Image from 'next/image';
 import { dbFirebase } from '../../utils/firestoreDB';
 import { SearchResultItemProps, MessageTypes } from '../../constants/Props';
 import CustomMessage from '../common/CustomMessage';
