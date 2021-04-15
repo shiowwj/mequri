@@ -11,17 +11,16 @@ const SearchHistoryItem: React.FC = () => {
 
   const currentSearchResultContext = useCurrentSearchResult();
   const [searchHistoryList, setSearchHistoryList] = useState<SearchResultItemProps[] | null>();
-  // const [ hasLoaded, setHasLoaded ] = useState(false);
 
-  // const getWeatherByID
-
+  /**
+   * * Handles Fetches search history records 
+   */
   const fetchResultsList = async () => {
     try {
       const retrieveSearchHistoryList = await dbFirebase().getAllSearchResults();
       if (retrieveSearchHistoryList) {
         if (retrieveSearchHistoryList.length > 0) {
           setSearchHistoryList(retrieveSearchHistoryList);
-          // return retrieveSearchHistoryList
         }
       } else {
         setSearchHistoryList(null);
