@@ -1,30 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
-import { SearchFormDataProps, SearchResultsProps } from '../../constants/Props';
+import { SearchFormDataProps, SearchResultItemProps } from '../../constants/Props';
 import { ApiConstants } from '../../constants/ApiContants';
 import { useCurrentSearchResult } from '../../hooks/currentSearchResult';
+import { dbFirebase } from '../../utils/firestoreDB';
 
 const SearchWeatherForm: React.FC = () => {
 
   const currentSearchResultContext = useCurrentSearchResult();
-  // const [hasSubmitError, setHasSubmitError] = useState(false);
-  // const [errorMessage, setErrorMessage] = useState<string>('');
   const { register, formState: { errors }, handleSubmit, reset } = useForm<SearchFormDataProps>();
 
   /**
    * * Handles the search form event
    */
   const onSubmitSearch = handleSubmit(async (data) => {
-    console.log('submit form action....')
-    const searchResultResponse = await getWeather(data);
+    // console.log('submit form action....')
+    const searchResultResponse = await getWeatherByCityCountry(data);
     if (searchResultResponse) {
       const data = await searchResultResponse.json();
       if (searchResultResponse.status === 200) {
-        // setHasSubmitError(false);
         currentSearchResultContext.setSearchError(false);
         const timeStamp = new Date();
-        let searchResultObj: SearchResultsProps = {
-          id: data['id'],
+        let searchResultObj: SearchResultItemProps = {
+          cityId: data['id'],
           city: data['name'],
           country: data['sys']['country'],
           weather: data['weather'][0]['main'],
@@ -35,15 +33,16 @@ const SearchWeatherForm: React.FC = () => {
           humidity: data['main']['humidity'],
           date_of_request: timeStamp
         };
-        console.log('search result obj', searchResultObj);
-        // searchMainCallBack('testtest')
         currentSearchResultContext.setCurrentResults(searchResultObj);
+        // save into successful search into Db
+        await dbFirebase().createSearchResultHistoryItem(searchResultObj);
+        // let app know search has been successful -> to reload list
+        currentSearchResultContext.setHasTriggeredEvent(true);
+        onClearSearchForm();
       } else {
         const error = data;
         currentSearchResultContext.setSearchError(true);
         currentSearchResultContext.setSearchErrorMessage(error['message']);
-        // setHasSubmitError(true);
-        // setErrorMessage(error['message'])
         currentSearchResultContext.setCurrentResults(null);
       }
     }
@@ -68,9 +67,9 @@ const SearchWeatherForm: React.FC = () => {
    * * Fetches weather data based on user inputs 
    * 
    * @param {city, country} 
-   * @returns searchResultObj: SearchResultsProps
+   * @returns searchResultObj: SearchResultItemProps
    */
-  const getWeather = async ({ city, country }: SearchFormDataProps) => {
+  const getWeatherByCityCountry = async ({ city, country }: SearchFormDataProps) => {
 
     const cityParams = `${city ? city : ''}`;
     const countryParams = `${country ? ',' + country : ''}`;

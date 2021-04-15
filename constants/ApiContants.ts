@@ -12,3 +12,4 @@ export { ApiConstants };
 // api.openweathermap.org/data/2.5/weather?q={city name},{state code},{country code}&appid={API key}
 // api.openweathermap.org/data/2.5/weather?q=London&appid={API key}
 // api.openweathermap.org/data/2.5/weather?q=London,uk&appid={API key}
+// api.openweathermap.org/data/2.5/weather?id=2172797&appid={API key}

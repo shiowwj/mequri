@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import SearchWeatherForm from './searchWeatherForm';
 import { useCurrentSearchResult } from '../../hooks/currentSearchResult';
-import { SearchResultsProps, MessageTypes } from '../../constants/Props';
+import { SearchResultItemProps, MessageTypes } from '../../constants/Props';
 import SearchResultDisplay from './searchResultDisplay';
-import CustomMessage from '../common/errorMessage';
+import CustomMessage from '../common/CustomMessage';
 
 
 const SearchMain: React.FC = () => {
@@ -11,7 +11,7 @@ const SearchMain: React.FC = () => {
   const currentSearchResultContext = useCurrentSearchResult();
   const [hasSubmitError, setHasSubmitError] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [resultDisplay, setResultDisplay] = useState<SearchResultsProps | null>(null);
+  const [resultDisplay, setResultDisplay] = useState<SearchResultItemProps | null>(null);
 
   useEffect(() => {
     setResultDisplay(currentSearchResultContext.currentResult);

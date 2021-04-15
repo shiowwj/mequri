@@ -1,55 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { SearchResultsProps } from '../../constants/Props';
+import { SearchResultItemProps } from '../../constants/Props';
 import { useCurrentSearchResult } from '../../hooks/currentSearchResult';
+import { dateFormatter, capitializeFirstWord } from '../../utils/helperFunctions';
 
 const SearchResultDisplay: React.FC = () => {
 
   const currentSearchResultContext = useCurrentSearchResult();
-  const [resultDisplay, setResultDisplay] = useState<SearchResultsProps | null>(null);
+  const [resultDisplay, setResultDisplay] = useState<SearchResultItemProps | null>(null);
 
   useEffect(() => {
     setResultDisplay(currentSearchResultContext.currentResult);
   })
-
-
-  /**
-   * * Function to capitalise string
-   * @param text 
-   * @returns string of words capitalised
-   */
-  const capitializeFirstWord = (text: string | undefined): string => {
-    if (text == undefined) {
-      return '';
-    }
-    const words = text.split(" ");
-    for (let i = 0; i < words.length; i++) {
-      words[i] = words[i][0].toUpperCase() + words[i].substr(1);
-    }
-    const joinedWords = words.join(" ");
-    return joinedWords;
-  }
-
-  /**
-   * * Function for date formatting
-   * @param date 
-   * @returns string of date formatteed
-   * TODO: Use momentjs 
-   *  
-   */
-
-  const dateFormatter = (date: Date | undefined): string => {
-    let dateString: string = '';
-    if (date == undefined) {
-      return '';
-    }
-    const year = date.getFullYear();
-    const month = date.getMonth();
-    const day = date.getDate();
-    const hour = date.getHours();
-    const minute = date.getMinutes();
-    dateString = `${year}-${month}-${day} ${hour}:${minute}hrs`
-    return dateString;
-  }
 
   return (
     <>

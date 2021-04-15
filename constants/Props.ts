@@ -3,18 +3,21 @@ export interface SearchFormDataProps {
   country: string;
 }
 
-export interface SearchResultsProps {
-  id: number;
+export interface SearchResultItemProps {
+  id?: string;
+  cityId: number;
   city: string;
   country: string;
-  weather: string;
-  description: string;
-  icon: string;
-  temp_max: number;
-  temp_min: number;
-  humidity: number;
+  weather?: string;
+  description?: string;
+  icon?: string;
+  temp_max?: number;
+  temp_min?: number;
+  humidity?: number;
   date_of_request: Date;
 }
+
+// export type SearchHistoryListProps = [SearchResultItemProps];
 
 export enum MessageTypes {
   ERROR = 'ERROR',
@@ -24,5 +27,5 @@ export enum MessageTypes {
 
 export interface CustomMessageProps {
   message: string | undefined;
-  type: MessageTypes;
+  type?: MessageTypes | undefined;
 }

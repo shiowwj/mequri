@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react';
-import { SearchResultsProps } from '../constants/Props';
+import { SearchResultItemProps } from '../constants/Props';
 
 /**
  * * The Current Search Result Context Prop
@@ -8,12 +8,17 @@ import { SearchResultsProps } from '../constants/Props';
  * @type setCurrentResults
  */
 type CurrentSearchResultContextProps = {
-  currentResult: SearchResultsProps | null,
-  setCurrentResults: (searchResult: SearchResultsProps | null) => void,
+  currentResult: SearchResultItemProps | null,
+  setCurrentResults: (searchResult: SearchResultItemProps | null) => void,
+
   hasSearchError: boolean,
   setSearchError: (isSearchError: boolean) => void,
+
   searchErrorMessage: string | null,
   setSearchErrorMessage: (errorMessage: string | null) => void,
+
+  hasTriggeredEvent: boolean,
+  setHasTriggeredEvent: (triggeredEvent: boolean) => void
 }
 
 /**
@@ -24,10 +29,15 @@ type CurrentSearchResultContextProps = {
 const CurrentSearchResultContext = createContext<CurrentSearchResultContextProps>({
   currentResult: null,
   setCurrentResults: () => { },
+
   hasSearchError: false,
   setSearchError: () => { },
+
   searchErrorMessage: null,
   setSearchErrorMessage: () => { },
+
+  hasTriggeredEvent: false,
+  setHasTriggeredEvent: () => { }
 });
 
 /**
@@ -38,11 +48,12 @@ const CurrentSearchResultContext = createContext<CurrentSearchResultContextProps
  */
 export function CurrentSearchResultProvider({ children }: any): JSX.Element {
 
-  const [result, setResult] = useState<SearchResultsProps | null>(null);
+  const [result, setResult] = useState<SearchResultItemProps | null>(null);
   const [hasError, setError] = useState<boolean>(false);
   const [hasErrorMessage, setErrorMessage] = useState<string | null>(null);
+  const [hasTriggered, setHasTriggered] = useState<boolean>(false);
 
-  const setCurrentResults = (searchResult: SearchResultsProps | null) => {
+  const setCurrentResults = (searchResult: SearchResultItemProps | null) => {
     setResult(searchResult);
   }
 
@@ -54,13 +65,19 @@ export function CurrentSearchResultProvider({ children }: any): JSX.Element {
     setErrorMessage(errorMessage);
   }
 
+  const setHasTriggeredEvent = (triggeredEvent: boolean) => {
+    setHasTriggered(triggeredEvent);
+  }
+
   const value: CurrentSearchResultContextProps = {
     currentResult: result,
     hasSearchError: hasError,
     searchErrorMessage: hasErrorMessage,
+    hasTriggeredEvent: hasTriggered,
     setCurrentResults,
     setSearchError,
-    setSearchErrorMessage
+    setSearchErrorMessage,
+    setHasTriggeredEvent
   }
 
   return (

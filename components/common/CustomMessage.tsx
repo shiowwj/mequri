@@ -9,7 +9,7 @@ const styles = {
 
 const CustomMessage = ({ message, type }: CustomMessageProps) => {
 
-  const typeOfStyle = styles[type];
+  const typeOfStyle = type ? styles[type] : '';
   const componentStyles = styles.DEFAULT + ' ' + typeOfStyle;
 
   return (
