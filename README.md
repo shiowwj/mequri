@@ -7,7 +7,7 @@ This is a [Next.js](~https://nextjs.org/~) project bootstrapped with [`create-ne
 To run locally:
 
 1. Clone repo
-2. Next, you will need to create a Firestore account.[Firebase Console](https://console.firebase.google.com/)
+2. Next, you will need to create a Firestore account from [Firebase Console](https://console.firebase.google.com/) here.
 3. Create a Web App + RealTime Database on Firebase Console.
 4. Obtain FireBaseConfig json details
 
