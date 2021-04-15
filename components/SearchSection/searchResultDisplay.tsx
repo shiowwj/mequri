@@ -11,7 +11,9 @@ const SearchResultDisplay: React.FC = () => {
   useEffect(() => {
     setResultDisplay(currentSearchResultContext.currentResult);
   })
-
+  /**
+   * TODO: Map Icons to Description
+   */
   return (
     <>
       <div id="searchResults" className="my-8 mx-4 py-4 px-8 border-2 bg-purple-100 rounded-lg shadow-lg" >
@@ -23,7 +25,7 @@ const SearchResultDisplay: React.FC = () => {
           <h1 className="font-semibold text-5xl tracking-wide"
           >{resultDisplay?.weather}</h1>
         </div>
-        <div>
+        <div className="mb-6">
           <div className="mt-1 flex md:flex-row justify-center">
             <div className="mx-8 flex-grow-0 w-4/12 md:w-2/12">
               <span><b>Description:</b></span>

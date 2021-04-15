@@ -3,7 +3,9 @@ import '../styles/globals.css'
 import { CurrentSearchResultProvider } from '../hooks/currentSearchResult';
 
 function MyApp({ Component, pageProps }: AppProps) {
-
+  /**
+   * TODO: Implement Loading SPINNER
+   */
   return (
     <CurrentSearchResultProvider>
       <Component {...pageProps} />
