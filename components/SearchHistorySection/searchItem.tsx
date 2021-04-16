@@ -32,10 +32,8 @@ const SearchHistoryItem: React.FC = () => {
 
   useEffect(() => {
     if (!searchHistoryList || currentSearchResultContext.hasTriggeredEvent) {
+      currentSearchResultContext.setHasTriggeredEvent(false);
       fetchResultsList();
-      if (currentSearchResultContext.hasTriggeredEvent) {
-        currentSearchResultContext.setHasTriggeredEvent(false);
-      }
     }
   }, [searchHistoryList, currentSearchResultContext.currentResult, currentSearchResultContext.hasTriggeredEvent])
 
@@ -75,9 +73,8 @@ const SearchHistoryItem: React.FC = () => {
   const handleDeleteSearchItem = async (item: SearchResultItemProps) => {
     //delete from db
     await dbFirebase().deleteSearchResult(item);
-    // reload list
+    // set event to reload list
     currentSearchResultContext.setHasTriggeredEvent(true);
-    fetchResultsList();
   }
 
   return (

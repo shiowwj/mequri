@@ -43,7 +43,7 @@ const dateFormatter = (date: Date | undefined): string => {
       ? '0' + date.getDate().toString()
       : date.getDate();
   const hour =
-    date.getHours() < 12
+    date.getHours() < 10
       ? '0' + date.getHours().toString()
       : date.getHours();
   const minute =
